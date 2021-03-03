@@ -19,8 +19,8 @@ class CircumcentreSolver {
 	/// <summary>
 	/// Whether the result was a valid sphere.
 	/// </summary>
-	bool Valid {
-		return this.m_Radius != 0;
+	bool isValid() {
+		return this->m_Radius != 0;
 	}
 
 	/// <summary>
@@ -31,7 +31,7 @@ class CircumcentreSolver {
 	/// <param name="b">The second point (array of 3 doubles for X, Y, Z).</param>
 	/// <param name="c">The third point (array of 3 doubles for X, Y, Z).</param>
 	/// <param name="d">The fourth point (array of 3 doubles for X, Y, Z).</param>
-	CircumcentreSolver(double[] a, double[] b, double[] c, double[] d)
+	CircumcentreSolver(double a[], double b[], double c[], double d[])
 	{
 		P[0][0] = a[0];
 		P[0][1] = a[1];
@@ -47,12 +47,12 @@ class CircumcentreSolver {
 		P[3][2] = d[2];
 
 		// Compute result sphere.
-		this.Sphere();
+		this->Sphere();
 	}
 
 	void Sphere() {
 		double r, m11, m12, m13, m14, m15;
-		double a[4][3] = {
+		double a[4][4] = {
 			{ ZERO, ZERO, ZERO, ZERO },
 			{ ZERO, ZERO, ZERO, ZERO },
 			{ ZERO, ZERO, ZERO, ZERO },
@@ -67,7 +67,7 @@ class CircumcentreSolver {
 			a[i][2] = P[i][2];
 			a[i][3] = 1;
 		}
-		m11 = this.Determinant(a, 4);
+		m11 = this->Determinant(a, 4);
 
 		// Find minor 1, 2.
 		for (int i = 0; i < 4; i++)
@@ -77,7 +77,7 @@ class CircumcentreSolver {
 			a[i][2] = P[i][2];
 			a[i][3] = 1;
 		}
-		m12 = this.Determinant(a, 4);
+		m12 = this->Determinant(a, 4);
 
 		// Find minor 1, 3.
 		for (int i = 0; i < 4; i++)
@@ -87,7 +87,7 @@ class CircumcentreSolver {
 			a[i][2] = P[i][2];
 			a[i][3] = 1;
 		}
-		m13 = this.Determinant(a, 4);
+		m13 = this->Determinant(a, 4);
 
 		// Find minor 1, 4.
 		for (int i = 0; i < 4; i++)
@@ -97,7 +97,7 @@ class CircumcentreSolver {
 			a[i][2] = P[i][1];
 			a[i][3] = 1;
 		}
-		m14 = this.Determinant(a, 4);
+		m14 = this->Determinant(a, 4);
 
 		// Find minor 1, 5.
 		for (int i = 0; i < 4; i++)
@@ -107,30 +107,30 @@ class CircumcentreSolver {
 			a[i][2] = P[i][1];
 			a[i][3] = P[i][2];
 		}
-		m15 = this.Determinant(a, 4);
+		m15 = this->Determinant(a, 4);
 
 		// Calculate result.
 		if (m11 == 0) {
-			this.m_X0 = 0;
-			this.m_Y0 = 0;
-			this.m_Z0 = 0;
-			this.m_Radius = 0;
+			this->m_X0 = 0;
+			this->m_Y0 = 0;
+			this->m_Z0 = 0;
+			this->m_Radius = 0;
 		} else {
-			this.m_X0 = 0.5 * m12 / m11;
-			this.m_Y0 = -0.5 * m13 / m11;
-			this.m_Z0 = 0.5 * m14 / m11;
-			this.m_Radius = sqrt(this.m_X0 * this.m_X0 + this.m_Y0 * this.m_Y0 + this.m_Z0 * this.m_Z0 - m15 / m11);
+			this->m_X0 = 0.5 * m12 / m11;
+			this->m_Y0 = -0.5 * m13 / m11;
+			this->m_Z0 = 0.5 * m14 / m11;
+			this->m_Radius = sqrt(this->m_X0 * this->m_X0 + this->m_Y0 * this->m_Y0 + this->m_Z0 * this->m_Z0 - m15 / m11);
 		}
 	}
 
 	/// <summary>
 	/// Recursive definition of determinate using expansion by minors.
 	/// </summary>
-	double Determinant(double a[4][3], int n)
+	double Determinant(double a[4][4], int n)
 	{
 			int i, j, j1, j2;
 			double d = 0;
-			double m[4][3] = 
+			double m[4][4] = 
 							{
 									{ ZERO, ZERO, ZERO, ZERO },
 									{ ZERO, ZERO, ZERO, ZERO },
@@ -160,13 +160,13 @@ class CircumcentreSolver {
 							}
 
 							// Sum (+/-)cofactor * minor.
-							d = d + pow(-1.0, j1) * a[0][j1] * this.Determinant(m, n - 1);
+							d = d + pow(-1.0, j1) * a[0][j1] * this->Determinant(m, n - 1);
 					}
 			}
 
 			return d;
 	}
-}
+};
 
 int zero_x;
 int zero_y;
