@@ -188,8 +188,9 @@ void pause() {
 }
 
 void calibrate() {
+	Serial.println("Please follow instructions at: ");
+	Serial.println("https://github.com/Daniel-Chin/Three-axis-analog-accelerometer-documentation#three-axis-analog-accelerometer");
 	Serial.println("The calibration starts. ");
-	Serial.println("Follow instructions at . ");
 	pause();
 
 	int x, y, z;

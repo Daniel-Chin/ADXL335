@@ -1,5 +1,5 @@
 # Three-axis analog accelerometer
-This documentation is an improvement based on the [official documentation](https://wiki.seeedstudio.com/Grove-3-Axis_Analog_Accelerometer/) made by IMA/B @ NYU Shanghai with a simplified calibration procedure.  
+This documentation is an improved version based on the [official documentation](https://wiki.seeedstudio.com/Grove-3-Axis_Analog_Accelerometer/) for IMA/B @ NYU Shanghai with a simplified calibration procedure.  
 
 From the [official documentation](https://wiki.seeedstudio.com/Grove-3-Axis_Analog_Accelerometer/):  
 > The ADXL335 is a small, thin, low power, complete 3-axis accelerometer with signal conditioned voltage outputs. The product measures acceleration with a minimum full-scale range of ±3 g. 
