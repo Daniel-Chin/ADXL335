@@ -1,5 +1,5 @@
 # Three-axis analog accelerometer
-This documentation is an improved version based on Grove's [official documentation](https://wiki.seeedstudio.com/Grove-3-Axis_Analog_Accelerometer/). The improvement is made for IMA/B @ NYU Shanghai with a simplified calibration procedure.  
+This documentation is an improved version, made for IMA/B @ NYU Shanghai, based on Seeed's [official documentation](https://wiki.seeedstudio.com/Grove-3-Axis_Analog_Accelerometer/). 
 
 From the [official documentation](https://wiki.seeedstudio.com/Grove-3-Axis_Analog_Accelerometer/):  
 > The ADXL335 is a small, thin, low power, complete 3-axis accelerometer with signal conditioned voltage outputs. The product measures acceleration with a minimum full-scale range of ±3 g. 
@@ -64,14 +64,14 @@ ADXL335 accelerometer;
 
 void setup() {
   Serial.begin(9600);
-  accelerometer.begin();
+  accelerometer.begin();  // always initialize the sensor first
 }
 
 void loop() {
   float x;
   float y;
   float z;
-  accelerometer.getAcceleration(&x, &y, &z);
+  accelerometer.getAcceleration(&x, &y, &z); // pointers to float
   Serial.print(x);
   Serial.print(", ");
   Serial.print(y);
@@ -80,3 +80,8 @@ void loop() {
   Serial.println();
 }
 ```
+
+## Additional information
+* The library provided by Seeed contains leftover debug outputs over Serial. If you are going to work with the accelerometer seriously, I encourage you to take a read into `ADXL335.cpp` and implement your own interface, directly with the analog ports. 
+* Seeed provided their own calibration script in the `examples` folder of the library. They require the user to align the sensor with perfect orientations, and the script contains incorrect function calls. We simplified the calibration procedure. 
+* Calibrating the sensor is equivalent to finding the center and radius of a sphere from four points. For this, we used code contributed by [June Rhodes](https://stackoverflow.com/a/13601950/8622053). 
