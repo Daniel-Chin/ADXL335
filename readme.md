@@ -15,7 +15,7 @@ Download the [3-Axis Analog Accelerometer Library](https://files.seeedstudio.com
 ## Calibration
 You need to calibrate the sensor before using its readings. Download and upload our [calibration script](./Calibration/Calibration.ino) to your Arduino. 
 
-**Notice**: You will orient the sensor in different ways and press a button while the sensor is *perfectly still*. Repeat: the sensor *has to be motionless* when you press the button. Avoid movement and vibration. 
+**Notice**: You will orient the sensor in different ways and press Enter while the sensor is *perfectly still*. Repeat: the sensor *has to be motionless* when you press Enter. Avoid movement and vibration. 
 
 The orientation of the sensor does *NOT* have to be precise. In fact, any four sufficiently different orientations will work.  
 
