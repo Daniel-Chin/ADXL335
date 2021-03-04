@@ -63,8 +63,8 @@ You are done with the calibration process! Now you may start to use the sensor i
 ADXL335 accelerometer;
 
 void setup() {
-	Serial.begin(9600);
-	accelerometer.begin();
+  Serial.begin(9600);
+  accelerometer.begin();
 }
 
 void loop() {
