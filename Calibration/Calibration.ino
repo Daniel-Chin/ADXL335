@@ -27,54 +27,6 @@ void pause() {
 	while(Serial.available() > 0) Serial.read();
 }
 
-void calibrate() {
-	Serial.println("Please follow instructions at: ");
-	Serial.println("https://github.com/Daniel-Chin/Three-axis-analog-accelerometer-documentation#three-axis-analog-accelerometer");
-	Serial.println("The calibration starts. ");
-	pause();
-
-	int x, y, z;
-	int a[] = {0, 0, 0};
-	int b[] = {0, 0, 0};
-	int c[] = {0, 0, 0};
-	int d[] = {0, 0, 0};
-
-	Serial.println("Z up.");
-	pause();
-	accelerometer.getXYZ(&a[0], &a[1], &a[2]);
-
-	Serial.println("X up.");
-	pause();
-	accelerometer.getXYZ(&b[0], &b[1], &b[2]);
-
-	Serial.println("Y up.");
-	pause();
-	accelerometer.getXYZ(&c[0], &c[1], &c[2]);
-
-	Serial.println("Z down.");
-	pause();
-	accelerometer.getXYZ(&d[0], &d[1], &d[2]);
-
-	CircumcentreSolver(a, b, c, d);
-
-	float zero_xv, zero_yv, zero_zv;
-	zero_xv = (float)m_X0 * ADC_REF / ADC_AMPLITUDE;
-	zero_yv = (float)m_Y0 * ADC_REF / ADC_AMPLITUDE;
-	zero_zv = (float)m_Z0 * ADC_REF / ADC_AMPLITUDE;
-	sensitivity = (float)m_Radius * ADC_REF / ADC_AMPLITUDE;
-	Serial.println();
-	Serial.println("please modify the macro definitions with the below in ADXL335.h");
-	Serial.print("  ZERO_X = ");
-	Serial.println(zero_xv);
-	Serial.print("  ZERO_Y = ");
-	Serial.println(zero_yv);
-	Serial.print("  ZERO_Z = ");
-	Serial.println(zero_zv);
-	Serial.print("  SENSITIVITY = ");
-	Serial.println(sensitivity, 2);
-	Serial.println("please modify the macro definitions with the above in ADXL335.h");
-}
-
 // Below is a script to find sphere center and radius from four points. 
 // Modified from https://stackoverflow.com/a/13601950/8622053
 // Original author: June Rhodes, 
@@ -236,4 +188,53 @@ double Determinant(double a[4][4], int n)
 		}
 
 		return d;
+}
+// The above is contribution from June Rhodes. 
+
+void calibrate() {
+	Serial.println("Please follow instructions at: ");
+	Serial.println("https://github.com/Daniel-Chin/Three-axis-analog-accelerometer-documentation#three-axis-analog-accelerometer");
+	Serial.println("The calibration starts. ");
+	pause();
+
+	int x, y, z;
+	int a[] = {0, 0, 0};
+	int b[] = {0, 0, 0};
+	int c[] = {0, 0, 0};
+	int d[] = {0, 0, 0};
+
+	Serial.println("Z up.");
+	pause();
+	accelerometer.getXYZ(&a[0], &a[1], &a[2]);
+
+	Serial.println("X up.");
+	pause();
+	accelerometer.getXYZ(&b[0], &b[1], &b[2]);
+
+	Serial.println("Y up.");
+	pause();
+	accelerometer.getXYZ(&c[0], &c[1], &c[2]);
+
+	Serial.println("Z down.");
+	pause();
+	accelerometer.getXYZ(&d[0], &d[1], &d[2]);
+
+	CircumcentreSolver(a, b, c, d);
+
+	float zero_xv, zero_yv, zero_zv;
+	zero_xv = (float)m_X0 * ADC_REF / ADC_AMPLITUDE;
+	zero_yv = (float)m_Y0 * ADC_REF / ADC_AMPLITUDE;
+	zero_zv = (float)m_Z0 * ADC_REF / ADC_AMPLITUDE;
+	sensitivity = (float)m_Radius * ADC_REF / ADC_AMPLITUDE;
+	Serial.println();
+	Serial.println("please modify the macro definitions with the below in ADXL335.h");
+	Serial.print("  ZERO_X = ");
+	Serial.println(zero_xv);
+	Serial.print("  ZERO_Y = ");
+	Serial.println(zero_yv);
+	Serial.print("  ZERO_Z = ");
+	Serial.println(zero_zv);
+	Serial.print("  SENSITIVITY = ");
+	Serial.println(sensitivity, 2);
+	Serial.println("please modify the macro definitions with the above in ADXL335.h");
 }
