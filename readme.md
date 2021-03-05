@@ -13,7 +13,7 @@ Connect VCC to 5V or 3.3V, GND to ground, X to analog port A0, Y to A1, and Z to
 Download the [3-Axis Analog Accelerometer Library](https://files.seeedstudio.com/wiki/Grove-3-Axis_Analog_Accelerometer/res/AnalogAccelerometer.zip) and unzip it into the libraries file of Arduino IDE by the path: `..\arduino-1.0.1\libraries`. If having trouble, read the [guide to Arduino library](https://www.arduino.cc/en/guide/libraries).  
 
 ## Calibration
-You need to calibrate the sensor before using its readings. Download and upload our [calibration script](./Calibration/Calibration.ino) to your Arduino. 
+You need to calibrate the sensor before using its readings. Download and upload our [calibration script](./Calibration/Calibration.ino) to your Arduino. ([link to raw text](https://raw.githubusercontent.com/Daniel-Chin/Three-axis-analog-accelerometer-documentation/main/Calibration/Calibration.ino))
 
 **Notice**: You will orient the sensor in different ways and press Enter while the sensor is *perfectly still*. Repeat: the sensor *has to be motionless* when you press Enter. Avoid movement and vibration. 
 
